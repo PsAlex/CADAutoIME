@@ -4,7 +4,7 @@ namespace OpenCadIme
 {
     internal static class AppConstants
     {
-        public const string Version = "0.4.3";
+        public const string Version = "0.4.4";
         public const string VersionDisplay = "v" + Version;
         public const string VersionFull = Version + " ";
         public const string ConfigFileName = "AutoImeCommands.txt";

@@ -220,7 +220,7 @@ namespace OpenCadIme.UI.ModernWpf
             cmdList.Remove(cmd);
             if (!isCore) customCmdSet.Remove(cmd);
             RebuildTags(isCore ? wpCore : wpCustom, cmdList, isCore);
-            ShowToastStatus($"✅ 指令 [{cmd}] 已移除，可按 Ctrl+Z 撤销。");
+            ShowToastStatus($"指令 [{cmd}] 已移除，可按 Ctrl+Z 撤销。");
         }
 
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -246,9 +246,9 @@ namespace OpenCadIme.UI.ModernWpf
             {
                 txtNewCmd.Clear(); txtNewCmd.Focus();
                 RebuildTags(wpCustom, customCmds, false);
-                ShowToastStatus($"✅ 成功添加 {addedCount} 个指令" + (dupCount > 0 ? $" (跳过 {dupCount} 个重复)" : ""));
+                ShowToastStatus($"成功添加 {addedCount} 个指令" + (dupCount > 0 ? $" (跳过 {dupCount} 个重复)" : ""));
             }
-            else if (dupCount > 0) ShowToastStatus($"⚠ 输入的指令已存在，无需重复添加", true);
+            else if (dupCount > 0) ShowToastStatus($"输入的指令已存在，无需重复添加", true);
         }
 
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -269,7 +269,7 @@ namespace OpenCadIme.UI.ModernWpf
                         if (!last.IsCore) customCmdSet[last.Command] = true;
                     }
                     RebuildTags(last.IsCore ? wpCore : wpCustom, cmdList, last.IsCore);
-                    ShowToastStatus($"✅ 已撤销删除 [{last.Command}]");
+                    ShowToastStatus($"已撤销删除 [{last.Command}]");
                 }
                 e.Handled = true;
             }
@@ -283,7 +283,7 @@ namespace OpenCadIme.UI.ModernWpf
                     cmdList.Remove(last.Command);
                     if (!last.IsCore) customCmdSet.Remove(last.Command);
                     RebuildTags(last.IsCore ? wpCore : wpCustom, cmdList, last.IsCore);
-                    ShowToastStatus($"✅ 已重做删除 [{last.Command}]");
+                    ShowToastStatus($"已重做删除 [{last.Command}]");
                 }
                 e.Handled = true;
             }
@@ -311,7 +311,7 @@ namespace OpenCadIme.UI.ModernWpf
                 RbProcess.IsChecked = true;
                 RebuildTags(wpCore, coreCmds, true);
                 RebuildTags(wpCustom, customCmds, false);
-                ShowToastStatus("✅ 已成功恢复所有系统默认配置");
+                ShowToastStatus("已成功恢复所有系统默认配置");
             }
         }
 

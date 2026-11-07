@@ -106,7 +106,7 @@ namespace OpenCadIme.UI.LegacyForm
         private Timer statusTimer;
         private Label lblCheckUpdate;
 
-        private const string SearchPlaceholder = "🔍 搜索你需要管理的指令...";
+        private const string SearchPlaceholder = "搜索你需要管理的指令...";
         private const string AddPlaceholder = "输入指令全称 (不可输入快捷键，例如应输入 BLOCK)...";
         #endregion
 
@@ -128,7 +128,7 @@ namespace OpenCadIme.UI.LegacyForm
 
             this.FormBorderStyle = FormBorderStyle.None;
             this.StartPosition = FormStartPosition.CenterParent;
-            this.ClientSize = new Size(620, 750);
+            this.ClientSize = new Size(620, 590);
             this.BackColor = ThemeBgBase;
             this.ForeColor = ThemeTextMain;
 
@@ -165,11 +165,11 @@ namespace OpenCadIme.UI.LegacyForm
 
         private void InitializeModernComponent()
         {
-            TableLayoutPanel mainLayout = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 4, ColumnCount = 1, Padding = new Padding(20, 15, 20, 15) };
-            mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 90));
-            mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 60));
+            TableLayoutPanel mainLayout = new TableLayoutPanel { Dock = DockStyle.Fill, RowCount = 4, ColumnCount = 1, Padding = new Padding(20, 12, 20, 12) };
+            mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 78));
+            mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48));
             mainLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
-            mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 100));
+            mainLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 86));
             this.Controls.Add(mainLayout);
 
             Panel pnlHeader = new Panel { Dock = DockStyle.Fill, Margin = new Padding(0) };
@@ -209,8 +209,8 @@ namespace OpenCadIme.UI.LegacyForm
             pnlHeader.Controls.Add(btnClose);
             mainLayout.Controls.Add(pnlHeader, 0, 0);
 
-            Panel pnlSearchBox = new Panel { Dock = DockStyle.Fill, Margin = new Padding(0, 10, 0, 10), BackColor = ThemeBgInput, Padding = new Padding(1) };
-            Panel innerSearch = new Panel { Dock = DockStyle.Fill, BackColor = ThemeBgInput, Padding = new Padding(10, 8, 10, 8) };
+            Panel pnlSearchBox = new Panel { Dock = DockStyle.Fill, Margin = new Padding(0, 6, 0, 6), BackColor = ThemeBgInput, Padding = new Padding(1) };
+            Panel innerSearch = new Panel { Dock = DockStyle.Fill, BackColor = ThemeBgInput, Padding = new Padding(10, 6, 10, 6) };
             txtSearch = new TextBox { Dock = DockStyle.Fill, BorderStyle = BorderStyle.None, BackColor = ThemeBgInput, ForeColor = ThemeTextMuted, Font = FontInput, Text = SearchPlaceholder };
             txtSearch.GotFocus += delegate { if (txtSearch.Text == SearchPlaceholder) { txtSearch.Text = ""; txtSearch.ForeColor = ThemeTextMain; } };
             txtSearch.LostFocus += delegate { if (string.IsNullOrEmpty(txtSearch.Text) || txtSearch.Text.Trim().Length == 0) { txtSearch.Text = SearchPlaceholder; txtSearch.ForeColor = ThemeTextMuted; } };
@@ -247,18 +247,18 @@ namespace OpenCadIme.UI.LegacyForm
             pnlCore.Paint += DrawPanelBorder;
             Panel coreTitleBar = new Panel { Dock = DockStyle.Top, Height = 25 };
             coreTitleBar.Controls.Add(new Label { Text = "系统内置指令", Font = FontNormal, ForeColor = ThemeTextMuted, Dock = DockStyle.Left, AutoSize = true });
-            coreTitleBar.Controls.Add(new Label { Text = "⚠ 建议不要删除核心指令", Font = FontNormal, ForeColor = ThemeDanger, Dock = DockStyle.Right, AutoSize = true });
+            coreTitleBar.Controls.Add(new Label { Text = "建议不要删除核心指令", Font = FontNormal, ForeColor = ThemeDanger, Dock = DockStyle.Right, AutoSize = true });
             flpCore = new FlowLayoutPanel { Dock = DockStyle.Fill, AutoScroll = true, BackColor = ThemeBgSurface, Margin = new Padding(0, 5, 0, 0) };
             pnlCore.Controls.Add(flpCore); pnlCore.Controls.Add(coreTitleBar);
             contentLayout.Controls.Add(pnlCore, 0, 1);
             mainLayout.Controls.Add(contentLayout, 0, 2);
 
-            Panel pnlFooter = new Panel { Dock = DockStyle.Fill, Margin = new Padding(0, 10, 0, 0) };
+            Panel pnlFooter = new Panel { Dock = DockStyle.Fill, Margin = new Padding(0, 6, 0, 0) };
 
-            Panel pnlMode = new Panel { Width = 350, Height = 28, Location = new Point(0, 0) };
+            Panel pnlMode = new Panel { Width = 380, Height = 28, Location = new Point(0, 0) };
             Label lblMode = new Label { Text = "接管模式：", ForeColor = ThemeTextMuted, AutoSize = true, Location = new Point(0, 4), Font = FontNormal };
-            rbProcess = new RadioButton { Text = "进程控制 (推荐)", ForeColor = ThemeTextMain, AutoSize = true, Location = new Point(70, 2), Font = FontNormal, Cursor = Cursors.Hand };
-            rbGlobal = new RadioButton { Text = "全局控制", ForeColor = ThemeTextMain, AutoSize = true, Location = new Point(190, 2), Font = FontNormal, Cursor = Cursors.Hand };
+            rbProcess = new RadioButton { Text = "进程控制 (推荐)", ForeColor = ThemeTextMain, AutoSize = true, Location = new Point(76, 2), Font = FontNormal, Cursor = Cursors.Hand };
+            rbGlobal = new RadioButton { Text = "全局控制", ForeColor = ThemeTextMain, AutoSize = true, Location = new Point(216, 2), Font = FontNormal, Cursor = Cursors.Hand };
 
             ToolTip tt = new ToolTip();
             tt.SetToolTip(rbProcess, "仅在 CAD 窗口激活时切换，切出到微信/浏览器保持原样。适合微信输入法等现代框架。");
@@ -268,11 +268,11 @@ namespace OpenCadIme.UI.LegacyForm
             pnlMode.Controls.Add(rbProcess);
             pnlMode.Controls.Add(rbGlobal);
 
-            Button btnReset = new Button { Text = "恢复默认", Size = new Size(90, 34), FlatStyle = FlatStyle.Flat, ForeColor = ThemeTextMain, BackColor = ThemeBgSurface, Font = FontNormal, Cursor = Cursors.Hand };
+            Button btnReset = new Button { Text = "恢复默认", Size = new Size(90, 32), FlatStyle = FlatStyle.Flat, ForeColor = ThemeTextMain, BackColor = ThemeBgSurface, Font = FontNormal, Cursor = Cursors.Hand };
             btnReset.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 60); btnReset.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 60, 60);
             btnReset.Click += BtnReset_Click;
 
-            Button btnSave = new Button { Text = "保存应用", Size = new Size(120, 34), FlatStyle = FlatStyle.Flat, ForeColor = Color.FromArgb(20, 20, 20), BackColor = ThemeCyan, Font = CreateSafeFont("微软雅黑", 9.5F, FontStyle.Bold), Cursor = Cursors.Hand };
+            Button btnSave = new Button { Text = "保存应用", Size = new Size(110, 32), FlatStyle = FlatStyle.Flat, ForeColor = Color.FromArgb(20, 20, 20), BackColor = ThemeCyan, Font = CreateSafeFont("微软雅黑", 9.5F, FontStyle.Bold), Cursor = Cursors.Hand };
             btnSave.FlatAppearance.BorderSize = 0; btnSave.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, 230, 230);
             btnSave.Click += BtnSave_Click;
 
@@ -282,6 +282,9 @@ namespace OpenCadIme.UI.LegacyForm
             statusTimer = new Timer { Interval = 3500 };
             statusTimer.Tick += delegate { lblStatus.Visible = false; statusTimer.Stop(); };
 
+            LinkLabel lnkOpenSource = new LinkLabel { Text = "开源地址", AutoSize = true, Font = FontNormal, LinkColor = ThemeCyan, ActiveLinkColor = Color.White, LinkBehavior = LinkBehavior.HoverUnderline };
+            lnkOpenSource.LinkClicked += delegate { try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://github.com/Andyang127/CadAutoIme") { UseShellExecute = true }); } catch { } };
+
             LinkLabel lnkAuthor = new LinkLabel { Text = "@ [浅醉·墨语] | [点击此处反馈]", AutoSize = true, Font = FontNormal, LinkColor = ThemeTextMuted, ActiveLinkColor = Color.White, LinkBehavior = LinkBehavior.HoverUnderline };
             lnkAuthor.LinkClicked += delegate { try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("https://v.douyin.com/fuX41UdMKeE/") { UseShellExecute = true }); } catch { } };
 
@@ -290,14 +293,16 @@ namespace OpenCadIme.UI.LegacyForm
             pnlFooter.Controls.Add(btnSave);
             pnlFooter.Controls.Add(lblTips);
             pnlFooter.Controls.Add(lblStatus);
+            pnlFooter.Controls.Add(lnkOpenSource);
             pnlFooter.Controls.Add(lnkAuthor);
 
             pnlFooter.Resize += delegate {
                 btnSave.Location = new Point(pnlFooter.Width - btnSave.Width, 0);
                 btnReset.Location = new Point(btnSave.Left - btnReset.Width - 10, 0);
-                lblTips.Location = new Point(0, pnlMode.Bottom + 12);
-                lblStatus.Location = new Point(0, lblTips.Bottom + 5);
-                lnkAuthor.Location = new Point(pnlFooter.Width - lnkAuthor.Width, pnlFooter.Height - lnkAuthor.Height - 5);
+                lblTips.Location = new Point(0, pnlMode.Bottom + 6);
+                lnkOpenSource.Location = new Point(0, pnlFooter.Height - lnkOpenSource.Height - 3);
+                lblStatus.Location = new Point(lnkOpenSource.Right + 12, lnkOpenSource.Top);
+                lnkAuthor.Location = new Point(pnlFooter.Width - lnkAuthor.Width, pnlFooter.Height - lnkAuthor.Height - 3);
             };
             mainLayout.Controls.Add(pnlFooter, 0, 3);
 
@@ -448,7 +453,7 @@ namespace OpenCadIme.UI.LegacyForm
             cmdList.Remove(cmd);
             if (!isCore) customCmdSet.Remove(cmd);
             RebuildTags(isCore ? flpCore : flpCustom, cmdList, isCore);
-            ShowToastStatus($"✅ 指令 [{cmd}] 已移除，可按 Ctrl+Z 撤销。");
+            ShowToastStatus($"指令 [{cmd}] 已移除，可按 Ctrl+Z 撤销。");
         }
 
         private void BtnAdd_Click(object sender, EventArgs e)
@@ -475,11 +480,11 @@ namespace OpenCadIme.UI.LegacyForm
             {
                 txtNewCmd.Clear(); txtNewCmd.Focus();
                 RebuildTags(flpCustom, customCmds, false);
-                ShowToastStatus($"✅ 成功添加 {addedCount} 个指令" + (dupCount > 0 ? $" (跳过 {dupCount} 个重复)" : ""));
+                ShowToastStatus($"成功添加 {addedCount} 个指令" + (dupCount > 0 ? $" (跳过 {dupCount} 个重复)" : ""));
             }
             else if (dupCount > 0)
             {
-                ShowToastStatus($"⚠ 输入的指令已存在，无需重复添加", true);
+                ShowToastStatus($"输入的指令已存在，无需重复添加", true);
             }
         }
 
@@ -497,7 +502,7 @@ namespace OpenCadIme.UI.LegacyForm
 
                 RebuildTags(flpCore, coreCmds, true);
                 RebuildTags(flpCustom, customCmds, false);
-                ShowToastStatus("✅ 已成功恢复所有系统默认配置");
+                ShowToastStatus("已成功恢复所有系统默认配置");
             }
         }
 
@@ -529,7 +534,7 @@ namespace OpenCadIme.UI.LegacyForm
                         if (!last.IsCore) customCmdSet[last.Command] = true;
                     }
                     RebuildTags(last.IsCore ? flpCore : flpCustom, cmdList, last.IsCore);
-                    ShowToastStatus($"✅ 已撤销删除 [{last.Command}]");
+                    ShowToastStatus($"已撤销删除 [{last.Command}]");
                 }
             }
             else if ((ModifierKeys & Keys.Control) == Keys.Control && e.KeyCode == Keys.Y)
@@ -542,7 +547,7 @@ namespace OpenCadIme.UI.LegacyForm
                     cmdList.Remove(last.Command);
                     if (!last.IsCore) customCmdSet.Remove(last.Command);
                     RebuildTags(last.IsCore ? flpCore : flpCustom, cmdList, last.IsCore);
-                    ShowToastStatus($"✅ 已重做删除 [{last.Command}]");
+                    ShowToastStatus($"已重做删除 [{last.Command}]");
                 }
             }
             else if (e.KeyCode == Keys.Delete)
@@ -561,7 +566,7 @@ namespace OpenCadIme.UI.LegacyForm
             if (MessageBox.Show($"发现全新版本 [{latestVer}]！\n是否立即前往 GitHub 下载页查看更新内容？", "发现新版本", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
             {
                 try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(AppConstants.LatestReleaseUrl) { UseShellExecute = true }); }
-                catch { ShowToastStatus("⚠️ 无法自动打开浏览器，请手动访问 GitHub", true); }
+                catch { ShowToastStatus("无法自动打开浏览器，请手动访问 GitHub", true); }
             }
         }
 

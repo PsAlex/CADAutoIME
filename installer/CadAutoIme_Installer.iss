@@ -1,6 +1,6 @@
 #define MyAppNameZh "智能中英输入法自动切换 (CAD Auto IME)"
 #define MyAppNameEn "CadAutoIme"
-#define MyAppVersion "0.4.3"
+#define MyAppVersion GetStringFileInfo("..\build\Sys24\OpenCadIme_Sys24.dll", "ProductVersion")
 #define MyPublisher "Mr.yang"
 #define DllPrefix "OpenCadIme"
 #define MyAppDirName "OpenCadIme"
@@ -20,7 +20,7 @@ AppPublisher={#MyPublisher}
 OutputBaseFilename={#MyAppNameEn}_Setup_v{#MyAppVersion}
 OutputDir=..\build\Installer
 
-DefaultDirName={userappdata}\{#MyAppDirName}
+DefaultDirName={userappdata}\InkVerse\{#MyAppNameEn}
 DefaultGroupName={#MyAppNameZh}
 DisableProgramGroupPage=no
 AllowNoIcons=yes
@@ -56,9 +56,9 @@ Source: "{#OutputPath}\Sys27\*"; DestDir: "{app}\Sys27"; Excludes: "*.pdb,*.xml"
 Name: "desktopicon"; Description: "创建使用说明桌面快捷方式"; GroupDescription: "附加选项:"; Flags: checkablealone
 
 [Icons]
-Name: "{group}\📖 {#MyAppNameZh} - 使用说明"; Filename: "{app}\Readme.html"; IconFilename: "{app}\Icon.ico"; Comment: "查看使用说明与命令列表"
-Name: "{group}\📁 {#MyAppNameZh} - 打开安装目录"; Filename: "{app}"; Comment: "打开安装文件夹"
-Name: "{group}\🗑️ 卸载 {#MyAppNameZh}"; Filename: "{uninstallexe}"; IconFilename: "{app}\Icon.ico"; Comment: "卸载输入法切换插件"
+Name: "{group}\{#MyAppNameZh} - 使用说明"; Filename: "{app}\Readme.html"; IconFilename: "{app}\Icon.ico"; Comment: "查看使用说明与命令列表"
+Name: "{group}\{#MyAppNameZh} - 打开安装目录"; Filename: "{app}"; Comment: "打开安装文件夹"
+Name: "{group}\卸载 {#MyAppNameZh}"; Filename: "{uninstallexe}"; IconFilename: "{app}\Icon.ico"; Comment: "卸载输入法切换插件"
 Name: "{autodesktop}\{#MyAppNameZh}"; Filename: "{app}\Readme.html"; IconFilename: "{app}\Icon.ico"; Comment: "{#MyAppNameZh}"; Tasks: desktopicon
 
 [Languages]

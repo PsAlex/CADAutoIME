@@ -593,7 +593,7 @@
         <header>
             <span class="brand-badge"><i class="fa-solid fa-keyboard"></i> CAD Auto IME</span>
             <h1>智能中英输入法自动切换</h1>
-            <p><i class="fa-solid fa-file-code"></i> CAD Auto IME | 技术使用说明 (v0.4.3 版)</p>
+            <p><i class="fa-solid fa-file-code"></i> CAD Auto IME | 技术使用说明 (v0.4.4 版)</p>
         </header>
 
         <!-- 部署通知区块 -->
@@ -653,7 +653,7 @@
 
         <!-- 核心特性 -->
         <section id="features">
-            <h2><i class="fa-solid fa-bolt"></i> v0.4.3 版主要改进与特性</h2>
+            <h2><i class="fa-solid fa-bolt"></i> v0.4.4 版主要改进与特性</h2>
             <p>本次版本重点重构了命令生命周期判定流程，并完善了 TSF 与 IMM32 的接口调用：</p>
             <div class="diagram-box" style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; margin: 24px 0; text-align: center;">
                 <div style="font-weight: 700; color: var(--text-dark); margin-bottom: 15px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px;">
@@ -917,6 +917,21 @@
                 <div class="timeline-item active">
                     <div class="timeline-marker"></div>
                     <div class="timeline-title">
+                        <span>📦 v0.4.4</span>
+                        <span class="badge-update">当前最新版</span>
+                    </div>
+                    <div class="timeline-content">
+                        <ul>
+                            <li><strong>🔄【TSF 隔间状态实时复核】</strong>：在 <code>IsAlreadyInState</code> 中引入原生 <code>ITfCompartment.GetValue</code> 双轨校验，彻底解决 Win10/11 现代输入法按 <code>Shift</code> 键切换后 IMM32 与 TSF 状态不同步导致的漏切问题。</li>
+                            <li><strong>🧹【配置层单一数据源重构】</strong>：统一 <code>ConfigManager</code> 与 <code>UiConfigManager</code> 命令归一化逻辑，消除重复代码维护。</li>
+                            <li><strong>🛠️【全版本集成与菜单对齐】</strong>：完善墨语 X 经典菜单栏智能输入法子菜单项，统一动态版本号引用机制。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-title">
                         <span>📦 v0.4.3</span>
                         <span class="badge-update">当前最新版</span>
                     </div>
@@ -1073,7 +1088,7 @@
             <p><strong>智能中英输入法自动切换 (CAD Auto IME)</strong></p>
             <p style="font-style: italic;">专注于设计与绘图，减少手动切换输入法的繁琐步骤</p>
             <p style="font-size: 11px; margin-top: 16px; color: #94a3b8;">
-                文档版本：v0.4.3 | 更新时间：2026 年 09 月 | 适配系统：Windows 7/10/11 (32/64 位)
+                文档版本：v0.4.4 | 更新时间：2026 年 11 月 | 适配系统：Windows 7/10/11 (32/64 位)
             </p>
         </footer>
     </main>

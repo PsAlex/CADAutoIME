@@ -1,4 +1,4 @@
-﻿using OpenCadIme;
+using OpenCadIme;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -14,3 +14,4 @@ using System.Runtime.InteropServices;
 [assembly: Guid("D6875551-6680-4A64-A506-55249E070B44")] 
 [assembly: AssemblyVersion(AppConstants.Version + ".0")]
 [assembly: AssemblyFileVersion(AppConstants.Version + ".0")]
+[assembly: AssemblyInformationalVersion(AppConstants.Version)]

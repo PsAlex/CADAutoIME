@@ -8,7 +8,7 @@
 
 根据当前命令与编辑状态自动切换中英文输入法，减少手动切换的操作中断。
 
-- **版本**: v0.4.3
+- **版本**: v0.4.4
 - **命名空间**: `OpenCadIme`
 - **核心能力**: 智能状态感知 | 双轨接口协同 | 跨版本适配 | 多文档独立隔离
 
@@ -228,29 +228,29 @@ Visual Studio 2022+
 
 ```
 
-CAD Auto IME/                    
-├── build/                # 编译输出目录                    
-├── installer/            # 安装包项目 (Inno Setup)                    
-├── Libs/                 # AutoCAD SDK 依赖 (CAD DLLs)                    
-│   └── AutoCAD/                    
-│       ├── Net2.0_2007-2009/                    
-│       ├── Net3.5_2010-2012/                    
-│       ... (其他版本)                    
-│       └── Net10.0_2027/                    
-├── OpenCadIme.Core/      # 核心逻辑共享项目 (Shared Project)                    
-│   ├── Core/             # 核心逻辑 (CommandInterceptor, ConfigManager 等)                    
-│   ├── Interop/          # Win32 API 调用                    
-│   ├── UI/               # UI 逻辑 (HudManager, LegacyForm, ModernWpf)                    
-│   ├── AppConstants.cs   # 常量定义                    
-│   ├── PluginMain.cs     # 插件入口                    
-│   └── UpdateManager.cs  # 更新检查                    
-├── src/                  # 各版本适配层 (版本差异化包装)                    
-│   ├── OpenCadIme_Sys17/                    
-│   ├── OpenCadIme_Sys18/                    
-│   ... (其他 SysXX 项目)                    
-│   └── OpenCadIme_Sys27/                    
-├── CAD Auto IME.sln      # Visual Studio 解决方案文件                    
-├── LICENSE.txt           # 开源协议                    
+CAD Auto IME/                      
+├── build/                # 编译输出目录                      
+├── installer/            # 安装包项目 (Inno Setup)                      
+├── Libs/                 # AutoCAD SDK 依赖 (CAD DLLs)                      
+│   └── AutoCAD/                      
+│       ├── Net2.0_2007-2009/                      
+│       ├── Net3.5_2010-2012/                      
+│       ... (其他版本)                      
+│       └── Net10.0_2027/                      
+├── OpenCadIme.Core/      # 核心逻辑共享项目 (Shared Project)                      
+│   ├── Core/             # 核心逻辑 (CommandInterceptor, ConfigManager 等)                      
+│   ├── Interop/          # Win32 API 调用                      
+│   ├── UI/               # UI 逻辑 (HudManager, LegacyForm, ModernWpf)                      
+│   ├── AppConstants.cs   # 常量定义                      
+│   ├── PluginMain.cs     # 插件入口                      
+│   └── UpdateManager.cs  # 更新检查                      
+├── src/                  # 各版本适配层 (版本差异化包装)                      
+│   ├── OpenCadIme_Sys17/                      
+│   ├── OpenCadIme_Sys18/                      
+│   ... (其他 SysXX 项目)                      
+│   └── OpenCadIme_Sys27/                      
+├── CAD Auto IME.sln      # Visual Studio 解决方案文件                      
+├── LICENSE.txt           # 开源协议                      
 └── README.md             # 项目说明文档  
 ```
 
@@ -267,6 +267,11 @@ CAD Auto IME/
 ---
 
 ## 📜 版本历史
+
+### v0.4.4 (2026-11) - 双轨状态校验与经典菜单完善
+
+- 🔄【TSF 隔间状态实时复核】：在 `IsAlreadyInState` 中引入原生 `ITfCompartment.GetValue` 双轨校验，彻底解决 Win10/11 现代输入法按 `Shift` 键切换后 IMM32 与 TSF 状态不同步导致的漏切问题。
+- 🧹【配置层单一数据源重构】：统一 `ConfigManager` 与 `UiConfigManager` 命令归一化逻辑，消除重复代码维护。
 
 ### v0.4.3 (2026-09) - 架构校准与全状态决策加固
 

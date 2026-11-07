@@ -186,7 +186,7 @@ namespace OpenCadIme.Core
             return DefaultCommandsMap.ContainsKey(norm);
         }
 
-        private static string NormalizeCommand(string input)
+        public static string NormalizeCommand(string input)
         {
             if (string.IsNullOrEmpty(input) || input.Trim().Length == 0) return string.Empty;
             string cmd = input.Trim('\uFEFF', '\u200B', ' ', '\t').ToUpperInvariant();

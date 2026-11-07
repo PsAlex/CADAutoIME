@@ -72,8 +72,8 @@ namespace OpenCadIme.UI
             if (OpenCadIme.Core.ConfigManager.LoadedCustomCount > 0)
                 doc.Editor.WriteMessage(">>> 已成功从 AutoImeCommands.txt 载入 " + OpenCadIme.Core.ConfigManager.LoadedCustomCount + " 个自定义白名单命令 <<<\n");
             doc.Editor.WriteMessage("----------------------------------------------------\n");
-            doc.Editor.WriteMessage("💡 输入命令 TOGGLEAUTOIME 可开启/关闭本插件\n");
-            doc.Editor.WriteMessage("💡 输入命令 CUSTOMAUTOIME 可调出白名单配置面板\n");
+            doc.Editor.WriteMessage("[提示] 输入命令 TOGGLEAUTOIME 可开启/关闭本插件\n");
+            doc.Editor.WriteMessage("[提示] 输入命令 CUSTOMAUTOIME 可调出白名单配置面板\n");
             doc.Editor.WriteMessage("====================================================\n");
 
             ShowHudWelcomeWindow(appVersion);

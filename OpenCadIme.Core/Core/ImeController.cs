@@ -58,11 +58,13 @@ namespace OpenCadIme
 
                         if (targetIsChinese)
                         {
-                            return isOpen && hasConv && ((conversion & Win32API.IME_CMODE_NATIVE) != 0);
+                            bool immInState = isOpen && hasConv && ((conversion & Win32API.IME_CMODE_NATIVE) != 0);
+                            return immInState && IsTsfAlreadyInState(true);
                         }
                         else
                         {
-                            return !isOpen || (hasConv && ((conversion & Win32API.IME_CMODE_NATIVE) == 0));
+                            bool immInState = !isOpen || (hasConv && ((conversion & Win32API.IME_CMODE_NATIVE) == 0));
+                            return immInState && IsTsfAlreadyInState(false);
                         }
                     }
                     finally
@@ -73,6 +75,64 @@ namespace OpenCadIme
             }
             catch { }
             return false;
+        }
+
+        private static bool IsTsfAlreadyInState(bool targetIsChinese)
+        {
+            if (_tsfThreadMgrObj == null) return true;
+            try
+            {
+                Win32API.ITfCompartmentMgr compMgr = _tsfThreadMgrObj as Win32API.ITfCompartmentMgr;
+                if (compMgr == null) return true;
+
+                Win32API.ITfCompartment openComp = null;
+                try
+                {
+                    Guid openGuid = Win32API.GUID_COMPARTMENT_KEYBOARD_OPENCLOSE;
+                    compMgr.GetCompartment(ref openGuid, out openComp);
+                    if (openComp != null)
+                    {
+                        Win32API.Variant varOpen;
+                        openComp.GetValue(out varOpen);
+                        if (varOpen.vt == 3)
+                        {
+                            bool tsfOpen = varOpen.lVal != 0;
+                            if (targetIsChinese != tsfOpen) return false;
+                        }
+                    }
+                }
+                finally
+                {
+                    if (openComp != null && Marshal.IsComObject(openComp))
+                        Marshal.ReleaseComObject(openComp);
+                }
+
+                if (targetIsChinese)
+                {
+                    Win32API.ITfCompartment convComp = null;
+                    try
+                    {
+                        Guid convGuid = Win32API.GUID_COMPARTMENT_KEYBOARD_CONVERSIONSTATUS;
+                        compMgr.GetCompartment(ref convGuid, out convComp);
+                        if (convComp != null)
+                        {
+                            Win32API.Variant varConv;
+                            convComp.GetValue(out varConv);
+                            if (varConv.vt == 3 && (varConv.lVal & 1) == 0)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                    finally
+                    {
+                        if (convComp != null && Marshal.IsComObject(convComp))
+                            Marshal.ReleaseComObject(convComp);
+                    }
+                }
+            }
+            catch { }
+            return true;
         }
 
         public static void ForceEnglish(IntPtr targetHwnd)
@@ -97,7 +157,8 @@ namespace OpenCadIme
                         if (Win32API.ImmGetConversionStatus(activeHimc, out conversion, out sentence))
                         {
                             uint newConversion = Win32API.IME_CMODE_ALPHANUMERIC;
-                            Win32API.ImmSetConversionStatus(activeHimc, newConversion, sentence);
+                            if (conversion != newConversion)
+                                Win32API.ImmSetConversionStatus(activeHimc, newConversion, sentence);
                         }
                     }
                 }
@@ -136,7 +197,8 @@ namespace OpenCadIme
                         if (Win32API.ImmGetConversionStatus(activeHimc, out conversion, out sentence))
                         {
                             uint targetMode = Win32API.IME_CMODE_NATIVE | Win32API.IME_CMODE_SYMBOL;
-                            Win32API.ImmSetConversionStatus(activeHimc, targetMode, sentence);
+                            if ((conversion & targetMode) != targetMode)
+                                Win32API.ImmSetConversionStatus(activeHimc, targetMode, sentence);
                         }
                     }
                 }

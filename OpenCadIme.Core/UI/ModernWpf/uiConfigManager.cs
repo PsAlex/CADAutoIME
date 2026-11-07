@@ -54,7 +54,7 @@ namespace OpenCadIme.UI
                         {
                             string tLine = line.Trim();
                             if (string.IsNullOrEmpty(tLine) || tLine.StartsWith("//") || tLine.StartsWith("[")) continue;
-                            string normalized = NormalizeCommand(tLine);
+                            string normalized = OpenCadIme.Core.ConfigManager.NormalizeCommand(tLine);
                             if (!string.IsNullOrEmpty(normalized)) cmds.Add(normalized);
                         }
                     }
